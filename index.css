@@ -1,22 +1,46 @@
+* {
+  margin: 0;
+}
 .cnt {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid blue;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 .side_bar {
   width: 30%;
   height: 100%;
-  border: 2px solid gold;
 }
 #map {
-  border: 2px solid red;
   width: 70%;
   height: 100%;
 }
 
-.active {
-  background-color: aquamarine;
+.mode {
+  position: relative;
+  border: 2px solid red;
+  width: 100px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  /* flex-direction: row-reverse; */
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.mode::after {
+  border: 2px solid gold;
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  content: "";
+}
+
+.mode.active::after {
+  transition: 1s;
+  background-color: red;
 }
