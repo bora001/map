@@ -10,25 +10,36 @@ let zoom = 13;
 let map;
 let mode = "null";
 let check = false;
-const input = document.getElementById("country_input");
 let currentCity;
 
 //select city
-input.addEventListener("change", function (e) {
-  let city = e.target.value;
-  currentCity = e.target.value;
-  setLocation(country[city]);
-  cleanList();
+const option = document.querySelectorAll(".opt_box p");
+const optionVisible = document.querySelector(".country_box p");
+optionVisible.addEventListener("click", function () {
+  document.querySelector(".opt_box").classList.toggle("hidden");
+});
+option.forEach((opt) => {
+  opt.addEventListener("click", function () {
+    let val = opt.attributes.data.value;
+    let city = opt.attributes.data.value;
+    currentCity = opt.attributes.data.value;
 
-  if (city === currentCity) {
-    renderPlace(placetogo[city]);
-  }
+    document.querySelector(".opt_box").classList.add("hidden");
+    optionVisible.innerText = opt.innerText;
+    setLocation(country[city]);
+    cleanList();
+
+    if (city === currentCity) {
+      renderPlace(placetogo[city]);
+    }
+  });
 });
 
 //get current location
 const success = (pos) => {
   let crd = pos.coords;
   country.current = [crd.latitude, crd.longitude];
+  console.log(pos);
   map = L.map("map").setView(country.current, zoom);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:

@@ -22,17 +22,18 @@
             <div class="mode">FLY MODE</div>
           </div>
         </div>
+        <div class="country_box">
+          <p>Current Location</p>
+          <div class="opt_box hidden">
+            <p data="current">Current Location</p>
+            <p data="seoul">Seoul</p>
+            <p data="vancouver">Vancouver</p>
+            <p data="Sydney">Sydney</p>
+            <p data="newyork">Newyork</p>
+            <p data="paris">Paris</p>
+          </div>
+        </div>
 
-        <form>
-          <select name="country" id="country_input">
-            <option value="current">Current Location</option>
-            <option value="seoul">Seoul</option>
-            <option value="vancouver">Vancouver</option>
-            <option value="sydney">Sydney</option>
-            <option value="newyork">NewYork</option>
-            <option value="paris">Paris</option>
-          </select>
-        </form>
         <div class="place_list"></div>
       </div>
       <!-- map -->
@@ -40,11 +41,11 @@
       <div id="map">
         <div class="info hidden">
           <div class="info_inner">
-            <h3>Set the memo here</h3>
+            <h3>Write Memo</h3>
             <textarea name="" id="submit_txt"></textarea>
             <div class="btn_box">
-              <button class="info_submit">submit</button>
-              <button class="info_cancel">cancel</button>
+              <button class="info_submit">Submit</button>
+              <button class="info_cancel">✖</button>
             </div>
           </div>
         </div>

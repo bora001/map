@@ -15,14 +15,39 @@
   height: 100%;
 }
 
-.side_bar #country_input {
-  padding: 3%;
+.side_bar .country_box {
+  position: relative;
+}
+.side_bar .country_box p {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  line-height: 40px;
   font-size: 18px;
+  letter-spacing: 0.5px;
+  width: 200px;
+  text-indent: 10px;
+  cursor: pointer;
+}
+.side_bar .country_box > p:first-child {
+  border-top: 1px solid black;
+  background-size: 20px 20px;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-image: url("https://cdn.pixabay.com/photo/2017/06/20/14/55/icon-2423352_960_720.png");
+}
+.side_bar .country_box .opt_box {
+  position: absolute;
+  background-color: #fff;
 }
 
-.side_bar #country_input option {
-  background-color: rgba(86, 144, 219, 0.112);
-  margin-top: 5px;
+.side_bar .country_box .opt_box p {
+  font-size: 14px;
+}
+
+.side_bar .country_box .opt_box p:hover {
+  background-color: rgba(86, 144, 219, 0.812);
+  color: #fff;
 }
 
 .side_top {
@@ -131,20 +156,55 @@
   justify-content: center;
 }
 .info_inner {
+  position: relative;
   background-color: rgba(255, 255, 255, 0.699);
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.349);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   width: 200px;
+  height: 120px;
   padding: 15px;
-  /* height: 10%; */
 }
 .info_inner h3 {
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 .info_inner textarea {
   margin: 15px 0;
+  border: none;
+  height: 100%;
+  padding: 5px;
+}
+
+.info .btn_box button {
+  border: none;
+  cursor: pointer;
+}
+.info .btn_box .info_submit {
+  padding: 5px 10px;
+  float: right;
+  background-color: rgba(86, 144, 219, 0.712);
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.273);
+}
+
+.info .btn_box .info_submit:hover {
+  background-color: rgba(86, 144, 219, 0.812);
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.473);
+
+  transition: 0.2s;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.473);
+}
+
+.info .btn_box .info_cancel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 22px;
+  padding: 5px 10px;
+  background-color: transparent;
 }
 
 .hidden {
