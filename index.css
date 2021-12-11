@@ -57,7 +57,6 @@
   text-align: center;
   width: 40px;
   line-height: 40px;
-
   border-radius: 40px;
   content: "💤";
   transition: 1s;
@@ -70,6 +69,17 @@
 .side_top .mode.active::after {
   background-color: rgba(86, 144, 219, 0.712);
   content: "🛫";
+}
+
+.side_top .spot {
+  margin-top: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  letter-spacing: 1px;
+  background-color: rgba(109, 160, 226, 0.312);
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .info {

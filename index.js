@@ -11,11 +11,13 @@ let map;
 let mode = "null";
 let check = false;
 const input = document.getElementById("country_input");
+let currentCity;
 
 input.addEventListener("change", function (e) {
   let city = e.target.value;
-  //   console.log(country[city]);
+  currentCity = e.target.value;
   setLocation(country[city]);
+  goTour(city);
 });
 
 //get current location
@@ -32,7 +34,7 @@ const success = (pos) => {
     .addTo(map)
     .bindPopup("you are here!")
     .openPopup();
-  markerNow._icon.style.filter = "hue-rotate(45deg)";
+  markerNow._icon.style.filter = "hue-rotate(150deg)";
   map.addEventListener("click", function (e) {
     !check ? newMarker(e.latlng) : "";
   });
@@ -45,8 +47,10 @@ const error = (err) => {
 navigator.geolocation.getCurrentPosition(success, error);
 
 const setLocation = (data) => {
-  mode === "fly" ? map.flyTo(data, zoom) : map.setView(data, zoom);
+  mode === "fly" ? map.flyTo(data, zoom) : map.setView(data, 12);
 };
+
+//mode
 
 const modeBtn = document.querySelector(".mode");
 
@@ -55,18 +59,20 @@ modeBtn.addEventListener("click", function () {
   modeBtn.classList.contains("active") ? (mode = "fly") : (mode = "null");
 });
 
+//marker
 const infoInput = document.querySelector(".info");
 const infoSubmit = document.querySelector(".info_submit");
 const infoCancel = document.querySelector(".info_cancel");
-
+let popup;
 const newMarker = (position) => {
+  console.log(position);
   infoInput.classList.remove("hidden");
   let newMarker = L.marker(position, { draggable: true }).addTo(map);
   check = true;
 
   infoCancel.addEventListener("click", function () {
     infoInput.classList.add("hidden");
-    newMarker.remove();
+    newMarker.remove(map);
     newMarker = "";
 
     setTimeout(() => {
@@ -77,13 +83,10 @@ const newMarker = (position) => {
   infoSubmit.addEventListener("click", function () {
     let val = document.getElementById("submit_txt");
     infoInput.classList.add("hidden");
-    newMarker.remove();
+    newMarker.remove(map);
     newMarker = "";
 
-    const popup = L.marker(position)
-      .addTo(map)
-      .bindPopup(val.value)
-      .openPopup();
+    popup = L.marker(position).addTo(map).bindPopup(val.value).openPopup();
 
     setTimeout(() => {
       popup.openPopup();
@@ -92,3 +95,54 @@ const newMarker = (position) => {
     }, 500);
   });
 };
+
+//place to visit
+
+const goTour = (city) => {
+  const spot = document.querySelector(".spot");
+  spot.addEventListener("click", function () {
+    // console.log(city, placetogo[city]);
+    renderPlace(placetogo[city]);
+  });
+};
+const markers = [];
+const renderPlace = (list) => {
+  const placeDiv = document.querySelector(".place_list");
+
+  for (let item of list) {
+    let placeMarker = L.marker(item.location, { id: item.name })
+      .addTo(map)
+      .bindPopup(item.name)
+      .openPopup();
+    placeMarker._icon.style.filter = "hue-rotate(280deg)";
+    // console.log(placeMarker);
+
+    markers.push(placeMarker);
+    const html = `
+  <div class="item" onClick="placeItem(this)">
+  <p>${item.name}</p>
+  </div>
+  `;
+    // console.log(placeDiv);
+    placeDiv.insertAdjacentHTML("afterbegin", html);
+
+    // console.log(item.name, item.location);
+  }
+};
+
+const placeItem = (item) => {
+  let arr = placetogo[currentCity];
+  for (let name of arr) {
+    if (name.name === item.innerText) {
+      map.setView(name.location, zoom);
+      for (let mark of markers) {
+        if (name.name == mark["options"]["id"]) {
+          console.log(mark);
+          mark.openPopup();
+        }
+      }
+    }
+  }
+};
+
+// console.log(placetogo);
