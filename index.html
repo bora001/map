@@ -16,9 +16,13 @@
   <body>
     <div class="cnt">
       <div class="side_bar">
-        <h1>Save on the map</h1>
+        <div class="side_top">
+          <h1>Save on the map</h1>
+          <div class="mode">FLY MODE</div>
+        </div>
+
         <form>
-          <select name="country" id="input">
+          <select name="country" id="country_input">
             <option value="current">Current Location</option>
             <option value="seoul">Seoul</option>
             <option value="vancouver">Vancouver</option>
@@ -27,11 +31,21 @@
             <option value="paris">Paris</option>
           </select>
         </form>
-        <div class="mode">Fly Mode</div>
       </div>
       <!-- map -->
 
-      <div id="map"></div>
+      <div id="map">
+        <div class="info hidden">
+          <div class="info_inner">
+            <h3>Set the memo here</h3>
+            <textarea name="" id="submit_txt"></textarea>
+            <div class="btn_box">
+              <button class="info_submit">submit</button>
+              <button class="info_cancel">cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script

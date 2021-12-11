@@ -9,7 +9,9 @@ let country = {
 let zoom = 13;
 let map;
 let mode = "null";
-const input = document.getElementById("input");
+let check = false;
+const input = document.getElementById("country_input");
+
 input.addEventListener("change", function (e) {
   let city = e.target.value;
   //   console.log(country[city]);
@@ -26,7 +28,14 @@ const success = (pos) => {
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
-  L.marker(country.current).addTo(map).bindPopup("you are here!").openPopup();
+  const markerNow = L.marker(country.current)
+    .addTo(map)
+    .bindPopup("you are here!")
+    .openPopup();
+  markerNow._icon.style.filter = "hue-rotate(45deg)";
+  map.addEventListener("click", function (e) {
+    !check ? newMarker(e.latlng) : "";
+  });
 };
 
 const error = (err) => {
@@ -35,14 +44,51 @@ const error = (err) => {
 
 navigator.geolocation.getCurrentPosition(success, error);
 
-// const mapCnt = document.getElementById("map");
-// const cnt = document.querySelector(".cnt");
 const setLocation = (data) => {
   mode === "fly" ? map.flyTo(data, zoom) : map.setView(data, zoom);
 };
 
 const modeBtn = document.querySelector(".mode");
+
 modeBtn.addEventListener("click", function () {
   modeBtn.classList.toggle("active");
   modeBtn.classList.contains("active") ? (mode = "fly") : (mode = "null");
 });
+
+const infoInput = document.querySelector(".info");
+const infoSubmit = document.querySelector(".info_submit");
+const infoCancel = document.querySelector(".info_cancel");
+
+const newMarker = (position) => {
+  infoInput.classList.remove("hidden");
+  let newMarker = L.marker(position, { draggable: true }).addTo(map);
+  check = true;
+
+  infoCancel.addEventListener("click", function () {
+    infoInput.classList.add("hidden");
+    newMarker.remove();
+    newMarker = "";
+
+    setTimeout(() => {
+      check = false;
+    }, 1000);
+  });
+
+  infoSubmit.addEventListener("click", function () {
+    let val = document.getElementById("submit_txt");
+    infoInput.classList.add("hidden");
+    newMarker.remove();
+    newMarker = "";
+
+    const popup = L.marker(position)
+      .addTo(map)
+      .bindPopup(val.value)
+      .openPopup();
+
+    setTimeout(() => {
+      popup.openPopup();
+      check = false;
+      val.value = "";
+    }, 500);
+  });
+};
