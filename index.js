@@ -13,11 +13,13 @@ let check = false;
 const input = document.getElementById("country_input");
 let currentCity;
 
+//select city
 input.addEventListener("change", function (e) {
   let city = e.target.value;
   currentCity = e.target.value;
   setLocation(country[city]);
   goTour(city);
+  cleanList();
 });
 
 //get current location
@@ -100,22 +102,23 @@ const newMarker = (position) => {
 
 const goTour = (city) => {
   const spot = document.querySelector(".spot");
+  console.log(city);
   spot.addEventListener("click", function () {
-    // console.log(city, placetogo[city]);
-    renderPlace(placetogo[city]);
+    if (city === currentCity) {
+      renderPlace(placetogo[city]);
+    }
   });
 };
+const placeDiv = document.querySelector(".place_list");
 const markers = [];
 const renderPlace = (list) => {
-  const placeDiv = document.querySelector(".place_list");
-
+  console.log(list, "list!!");
   for (let item of list) {
     let placeMarker = L.marker(item.location, { id: item.name })
       .addTo(map)
       .bindPopup(item.name)
       .openPopup();
     placeMarker._icon.style.filter = "hue-rotate(280deg)";
-    // console.log(placeMarker);
 
     markers.push(placeMarker);
     const html = `
@@ -123,10 +126,7 @@ const renderPlace = (list) => {
   <p>${item.name}</p>
   </div>
   `;
-    // console.log(placeDiv);
     placeDiv.insertAdjacentHTML("afterbegin", html);
-
-    // console.log(item.name, item.location);
   }
 };
 
@@ -142,6 +142,13 @@ const placeItem = (item) => {
         }
       }
     }
+  }
+};
+
+//clean placelist
+const cleanList = () => {
+  while (placeDiv.firstChild) {
+    placeDiv.removeChild(placeDiv.lastChild);
   }
 };
 
