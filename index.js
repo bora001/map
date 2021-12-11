@@ -112,7 +112,11 @@ const goTour = (city) => {
 const placeDiv = document.querySelector(".place_list");
 const markers = [];
 const renderPlace = (list) => {
-  console.log(list, "list!!");
+  if (!list && placeDiv.childElementCount < 1) {
+    const html = `<div>Service will be available soon!</div>`;
+    placeDiv.insertAdjacentHTML("afterbegin", html);
+    return;
+  }
   if (placeDiv.childElementCount !== list.length) {
     for (let item of list) {
       let placeMarker = L.marker(item.location, { id: item.name })
