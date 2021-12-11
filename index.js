@@ -113,20 +113,22 @@ const placeDiv = document.querySelector(".place_list");
 const markers = [];
 const renderPlace = (list) => {
   console.log(list, "list!!");
-  for (let item of list) {
-    let placeMarker = L.marker(item.location, { id: item.name })
-      .addTo(map)
-      .bindPopup(item.name)
-      .openPopup();
-    placeMarker._icon.style.filter = "hue-rotate(280deg)";
+  if (placeDiv.childElementCount !== list.length) {
+    for (let item of list) {
+      let placeMarker = L.marker(item.location, { id: item.name })
+        .addTo(map)
+        .bindPopup(item.name)
+        .openPopup();
+      placeMarker._icon.style.filter = "hue-rotate(280deg)";
 
-    markers.push(placeMarker);
-    const html = `
+      markers.push(placeMarker);
+      const html = `
   <div class="item" onClick="placeItem(this)">
   <p>${item.name}</p>
   </div>
   `;
-    placeDiv.insertAdjacentHTML("afterbegin", html);
+      placeDiv.insertAdjacentHTML("afterbegin", html);
+    }
   }
 };
 
