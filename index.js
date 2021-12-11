@@ -18,8 +18,11 @@ input.addEventListener("change", function (e) {
   let city = e.target.value;
   currentCity = e.target.value;
   setLocation(country[city]);
-  goTour(city);
   cleanList();
+
+  if (city === currentCity) {
+    renderPlace(placetogo[city]);
+  }
 });
 
 //get current location
@@ -67,7 +70,6 @@ const infoSubmit = document.querySelector(".info_submit");
 const infoCancel = document.querySelector(".info_cancel");
 let popup;
 const newMarker = (position) => {
-  console.log(position);
   infoInput.classList.remove("hidden");
   let newMarker = L.marker(position, { draggable: true }).addTo(map);
   check = true;
@@ -100,15 +102,6 @@ const newMarker = (position) => {
 
 //place to visit
 
-const goTour = (city) => {
-  const spot = document.querySelector(".spot");
-  console.log(city);
-  spot.addEventListener("click", function () {
-    if (city === currentCity) {
-      renderPlace(placetogo[city]);
-    }
-  });
-};
 const placeDiv = document.querySelector(".place_list");
 const markers = [];
 const renderPlace = (list) => {
@@ -128,6 +121,8 @@ const renderPlace = (list) => {
       markers.push(placeMarker);
       const html = `
   <div class="item" onClick="placeItem(this)">
+  <div class="img_box">
+  <img src=${item.img} /></div>
   <p>${item.name}</p>
   </div>
   `;
@@ -140,12 +135,11 @@ const placeItem = (item) => {
   let arr = placetogo[currentCity];
   for (let name of arr) {
     if (name.name === item.innerText) {
-      map.setView(name.location, zoom);
       for (let mark of markers) {
         if (name.name == mark["options"]["id"]) {
-          console.log(mark);
           mark.openPopup();
         }
+        map.setView(name.location, zoom);
       }
     }
   }
@@ -157,5 +151,3 @@ const cleanList = () => {
     placeDiv.removeChild(placeDiv.lastChild);
   }
 };
-
-// console.log(placetogo);
