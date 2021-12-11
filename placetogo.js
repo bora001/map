@@ -1,5 +1,5 @@
 const placetogo = {
-  vancouver: [
+  Vancouver: [
     {
       name: "Standley Park",
       location: { lat: 49.303188032431706, lng: -123.14601861278855 },
@@ -21,7 +21,7 @@ const placetogo = {
       img: "https://cdn.pixabay.com/photo/2021/08/14/00/56/crosswalk-6544311_960_720.jpg",
     },
   ],
-  seoul: [
+  Seoul: [
     {
       name: "Namsan",
       location: { lat: 37.55029358651351, lng: 126.99176661988773 },
@@ -33,12 +33,12 @@ const placetogo = {
       img: "https://cdn.pixabay.com/photo/2014/06/18/13/39/republic-of-korea-371235_960_720.jpg",
     },
     {
-      name: "cheonggyecheon",
+      name: "Cheonggyecheon",
       location: { lat: 37.568985776659076, lng: 126.9791025453837 },
       img: "https://cdn.pixabay.com/photo/2018/11/09/11/00/seoul-3804293_960_720.jpg",
     },
   ],
-  sydney: [
+  Sydney: [
     {
       name: "Opera House",
       location: { lat: -33.85731577645613, lng: 151.21510160921642 },
@@ -60,7 +60,7 @@ const placetogo = {
       img: "https://cdn.pixabay.com/photo/2014/03/11/09/05/sydney-285059_960_720.jpg",
     },
   ],
-  newyork: [
+  Newyork: [
     {
       name: "Statue of liberty",
       location: { lat: 40.68920582320907, lng: -74.04458171220219 },

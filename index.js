@@ -1,10 +1,10 @@
 let country = {
-  current: [],
-  vancouver: [49.246292, -123.116226],
-  paris: [48.864716, 2.349014],
-  seoul: [37.5326, 127.024612],
-  newyork: [40.73061, -73.935242],
-  sydney: [-33.865143, 151.2099],
+  Current: [],
+  Vancouver: [49.246292, -123.116226],
+  Paris: [48.864716, 2.349014],
+  Seoul: [37.5326, 127.024612],
+  Newyork: [40.73061, -73.935242],
+  Sydney: [-33.865143, 151.2099],
 };
 let zoom = 13;
 let map;
@@ -15,15 +15,18 @@ let currentCity;
 //select city
 const option = document.querySelectorAll(".opt_box p");
 const optionVisible = document.querySelector(".country_box p");
+
 optionVisible.addEventListener("click", function () {
   document.querySelector(".opt_box").classList.toggle("hidden");
 });
+
 option.forEach((opt) => {
   opt.addEventListener("click", function () {
-    let val = opt.attributes.data.value;
-    let city = opt.attributes.data.value;
-    currentCity = opt.attributes.data.value;
-
+    let city = opt.innerText;
+    if (opt.innerText === "Current Location") {
+      city = "current";
+    }
+    currentCity = city;
     document.querySelector(".opt_box").classList.add("hidden");
     optionVisible.innerText = opt.innerText;
     setLocation(country[city]);
@@ -39,13 +42,11 @@ option.forEach((opt) => {
 const success = (pos) => {
   let crd = pos.coords;
   country.current = [crd.latitude, crd.longitude];
-  console.log(pos);
   map = L.map("map").setView(country.current, zoom);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
-
   const markerNow = L.marker(country.current)
     .addTo(map)
     .bindPopup("you are here!")
@@ -144,6 +145,7 @@ const renderPlace = (list) => {
 
 const placeItem = (item) => {
   let arr = placetogo[currentCity];
+
   for (let name of arr) {
     if (name.name === item.innerText) {
       for (let mark of markers) {

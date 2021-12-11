@@ -1,11 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;500;600&display=swap");
+
 * {
   margin: 0;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 }
 .cnt {
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+.side_top {
+  display: flex;
+  justify-content: space-between;
+}
+.side_top h1 {
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+
+.side_top .mode {
+  background-color: rgba(5, 19, 37, 0.055);
+  width: 70px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  font-size: 14px;
+  letter-spacing: 1px;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.side_top .mode::after {
+  background-color: rgba(86, 144, 219, 0.212);
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  width: 40px;
+  margin-bottom: 8px;
+  border-radius: 40px;
+  transition: 1s;
+}
+
+.side_top .mode.active {
+  background-color: rgba(109, 160, 226, 0.312);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.421);
+  height: 30px;
+  transition: 1s;
+}
+.side_top .mode.active::after {
+  background-color: rgba(86, 144, 219, 0.712);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.421);
+  font-size: 26px;
+  height: 4px;
+  margin-top: -20px;
+  content: "🛫";
+  transition: 1s;
 }
 
 .side_bar {
@@ -23,7 +77,7 @@
   border-right: 1px solid black;
   border-left: 1px solid black;
   line-height: 40px;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 0.5px;
   width: 200px;
   text-indent: 10px;
@@ -42,7 +96,8 @@
 }
 
 .side_bar .country_box .opt_box p {
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .side_bar .country_box .opt_box p:hover {
@@ -50,53 +105,9 @@
   color: #fff;
 }
 
-.side_top {
-  display: flex;
-  justify-content: space-between;
-}
-
 #map {
   width: 70%;
   height: 100%;
-}
-
-.side_top .mode {
-  background-color: rgba(5, 19, 37, 0.055);
-  width: 70px;
-  padding: 10px;
-  border-radius: 15px;
-  display: flex;
-  font-size: 12px;
-  letter-spacing: 1px;
-  flex-direction: column-reverse;
-  justify-content: space-between;
-  align-items: center;
-  transition: 1s;
-  cursor: pointer;
-}
-
-.side_top .mode::after {
-  background-color: rgba(86, 144, 219, 0.212);
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  width: 40px;
-  line-height: 40px;
-  border-radius: 40px;
-  content: "💤";
-  transition: 1s;
-}
-
-.side_top .mode.active {
-  background-color: rgba(109, 160, 226, 0.312);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.421);
-
-  transition: 2s;
-}
-.side_top .mode.active::after {
-  background-color: rgba(86, 144, 219, 0.712);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.421);
-  content: "🛫";
 }
 
 .side_bar .place_list {
@@ -108,7 +119,7 @@
   cursor: pointer;
   display: flex;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 22px;
   align-items: center;
   justify-content: space-between;
 }
@@ -119,7 +130,7 @@
 .side_bar .place_list .item p {
   margin-right: 50px;
   position: relative;
-  line-height: 10px;
+  line-height: 15px;
 }
 
 .side_bar .place_list .item p::after {
@@ -163,14 +174,15 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  height: 120px;
+  height: 150px;
   padding: 15px;
 }
 .info_inner h3 {
+  font-size: 28px;
   letter-spacing: 0.8px;
 }
 .info_inner textarea {
-  margin: 15px 0;
+  margin: 5px 0 10px;
   border: none;
   height: 100%;
   padding: 5px;
@@ -187,6 +199,8 @@
   border-radius: 10px;
   font-weight: 700;
   color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.273);
 }
 
@@ -213,3 +227,14 @@
 /* .active {
   display: block;
 } */
+
+.leaflet-popup-content-wrapper {
+  padding: 1px;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 17px;
+}
+
+.leaflet-popup-tip-container {
+  margin-top: -1px;
+}
