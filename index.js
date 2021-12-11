@@ -164,3 +164,12 @@ const cleanList = () => {
     placeDiv.removeChild(placeDiv.lastChild);
   }
 };
+
+//mobile
+
+const mobileBtn = document.querySelector(".mobile_mode");
+const sideBar = document.querySelector(".side_bar");
+mobileBtn.addEventListener("click", function () {
+  sideBar.classList.toggle("mobile");
+  mobileBtn.classList.toggle("mobile");
+});

@@ -305,24 +305,25 @@
   }
 
   .side_bar {
-    /* border: 2px solid gold; */
     position: absolute;
-    bottom: 0;
     padding: 2vw;
-    /* top:0; */
+    top:90%;
     z-index: 9999;
     width: 100%;
-    height: 8%;
+    height: 100%;
     background-color: rgb(228, 226, 226);
+    transition: 1s;
   }
-  .side_bar:hover {
-    height: 35%;
+
+  .side_bar.mobile {
+    top: 55%;
     transition: 1s;
   }
 
   #map {
     position: absolute;
     width: 100%;
+    z-index: 1;
   }
   .side_top h1 {
     font-size: 10vw;
@@ -338,17 +339,47 @@
     display: none !important;
   }
 
-  .mode.hidden {
+  .mobile_mode.hidden {
     display: block !important;
-    width: 1.3021vw;
-    height: 1.3021vw;
+    position: relative;
+    width: 6vw;
+    height: 1vw;
+    background-color: rgb(119, 190, 236);
     margin-right: 5vw;
-    border-radius: 0;
+    /* border-radius: 0;
     background-color: transparent;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(https://cdn.pixabay.com/photo/2021/10/09/12/45/hamburger-icon-6694072_960_720.png); */
+    background-image: url(https://cdn.pixabay.com/photo/2021/10/09/12/45/hamburger-icon-6694072_960_720.png); */ */
   }
+
+  .mobile_mode.hidden::before,
+  .mobile_mode.hidden::after{
+    position: absolute;
+    width: 6vw;
+    height: 1vw;
+    top: 2vw;
+    background-color: rgb(119, 190, 236);
+    content: '';
+  }
+
+  .mobile_mode.hidden::after{
+    top: -2vw;
+  }
+
+  .mobile_mode.hidden.mobile::after{
+    top:0;
+    transform: rotate(45deg);
+  }
+  .mobile_mode.hidden.mobile::before{
+    top:0;
+    transform: rotate(135deg);
+  }
+.mobile_mode.hidden.mobile{
+  background-color: transparent;
+}
+  
+
 
 
 .side_bar .country_box p {
@@ -394,24 +425,27 @@
   margin-bottom: 1.3021vw;
   font-size: 2.8646vw;
   margin-right: 2vw;
+  display: flex;
+  flex-direction: column;
 }
 .side_bar .place_list .item p {
   margin-right: 4vw;
-  line-height: 1.9531vw;
+  line-height: 5vw;
 }
 
 .side_bar .place_list .item p::after {
-  border-top: 0.2604vw solid rgba(86, 144, 219, 0.712);
-  border-right: 0.2604vw solid rgba(86, 144, 219, 0.712);
-  width: 1.3021vw;
-  height: 1.3021vw;
+  border-top: 0.4vw solid rgba(86, 144, 219, 0.712);
+  border-right: 0.4vw solid rgba(86, 144, 219, 0.712);
+  width: 1vw;
+  height: 1vw;
+  top:1.5vw;
   right: -2.6042vw;
   transform: rotate(45deg);
 }
 
 .side_bar .place_list .img_box {
-  width: 26.0417vw;
-  height: 13.0208vw;
+  width: 100%;
+  height: 17vw;
 }
   
 }
