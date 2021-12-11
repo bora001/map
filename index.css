@@ -14,10 +14,11 @@
 .side_top {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
+
 }
 .side_top h1 {
   font-size: 50px;
-  margin-bottom: 30px;
 }
 
 .side_top .mode {
@@ -93,6 +94,7 @@
 .side_bar .country_box .opt_box {
   position: absolute;
   background-color: #fff;
+  z-index: 99;
 }
 
 .side_bar .country_box .opt_box p {
@@ -237,4 +239,179 @@
 
 .leaflet-popup-tip-container {
   margin-top: -1px;
+}
+
+/* responsive */
+@media screen and (min-width: 769px) and (max-width: 1440px) {
+  .side_top{
+    margin-bottom: 3vw;
+  }
+
+  .side_top h1 {
+    font-size: 3.4722vw;
+  }
+
+  .side_bar .place_list .img_box {
+    width: 15vw;
+    height: 8vw;
+  }
+
+  .side_bar .place_list .item {
+    box-shadow: 0.3472vw 0.3472vw 0.6944vw rgb(197 193 193 / 60%);
+    cursor: pointer;
+    margin-bottom: 0.6944vw;
+    font-size: 1.5278vw;
+    align-items: center;
+  }
+  .side_bar .place_list .item p {
+    margin-right: 3.4722vw;
+    line-height: 1.0417vw;
+  }
+
+  .side_bar .country_box p {
+    border-bottom: 0.0694vw solid black;
+    border-right: 0.0694vw solid black;
+    border-left: 0.0694vw solid black;
+    line-height: 2.7778vw;
+    font-size: 1.5278vw;
+    letter-spacing: 0.0347vw;
+    width: 13.8889vw;
+    text-indent: 0.6944vw;
+    cursor: pointer;
+  }
+  .side_bar .country_box > p:first-child {
+    border-top: 0.0694vw solid black;
+    background-size: 1.3889vw 1.3889vw;
+    background-position: 90% 50%;
+
+    background-image: url("https://cdn.pixabay.com/photo/2017/06/20/14/55/icon-2423352_960_720.png");
+  }
+  .side_bar .country_box .opt_box {
+  }
+
+  .side_bar .country_box .opt_box p {
+    font-size: 1.25vw;
+  }
+}
+/* mobile */
+@media screen and (max-width: 768px) {
+  .cnt {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .side_bar {
+    /* border: 2px solid gold; */
+    position: absolute;
+    bottom: 0;
+    padding: 2vw;
+    /* top:0; */
+    z-index: 9999;
+    width: 100%;
+    height: 8%;
+    background-color: rgb(228, 226, 226);
+  }
+  .side_bar:hover {
+    height: 35%;
+    transition: 1s;
+  }
+
+  #map {
+    position: absolute;
+    width: 100%;
+  }
+  .side_top h1 {
+    font-size: 10vw;
+    margin-top: 3vw;
+
+}
+  .side_top{
+    align-items: center;
+    margin-bottom: 3.9063vw;
+  }
+
+  .mode {
+    display: none !important;
+  }
+
+  .mode.hidden {
+    display: block !important;
+    width: 1.3021vw;
+    height: 1.3021vw;
+    margin-right: 5vw;
+    border-radius: 0;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(https://cdn.pixabay.com/photo/2021/10/09/12/45/hamburger-icon-6694072_960_720.png); */
+  }
+
+
+.side_bar .country_box p {
+  border-bottom: 0.1302vw solid black;
+  border-right: 0.1302vw solid black;
+  border-left: 0.1302vw solid black;
+  line-height: 8vw;
+  font-size: 4vw;
+  letter-spacing: 0.1vw;
+  width: 30vw;
+  text-indent: 1.3021vw;
+  cursor: pointer;
+}
+.side_bar .country_box > p:first-child {
+  border-top: 0.1302vw solid black;
+  background-size: 2.6042vw 2.6042vw;
+  background-position: 90% 50%;
+  
+  background-image: url("https://cdn.pixabay.com/photo/2017/06/20/14/55/icon-2423352_960_720.png");
+}
+
+.side_bar .country_box .opt_box p {
+  font-size: 2.3438vw;
+  
+}
+
+.side_bar .country_box .opt_box p:hover {
+  background-color: rgba(86, 144, 219, 0.812);
+}
+
+/* place to go */
+
+.side_bar .place_list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4vw auto;
+}
+
+.side_bar .place_list .item {
+  box-shadow: 0.6510vw 0.6510vw 1.3021vw rgb(197, 193, 193, 0.6);
+  cursor: pointer;
+  width: 46%;
+  margin-bottom: 1.3021vw;
+  font-size: 2.8646vw;
+  margin-right: 2vw;
+}
+.side_bar .place_list .item p {
+  margin-right: 4vw;
+  line-height: 1.9531vw;
+}
+
+.side_bar .place_list .item p::after {
+  border-top: 0.2604vw solid rgba(86, 144, 219, 0.712);
+  border-right: 0.2604vw solid rgba(86, 144, 219, 0.712);
+  width: 1.3021vw;
+  height: 1.3021vw;
+  right: -2.6042vw;
+  transform: rotate(45deg);
+}
+
+.side_bar .place_list .img_box {
+  width: 26.0417vw;
+  height: 13.0208vw;
+}
+  
 }
