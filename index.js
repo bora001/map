@@ -42,7 +42,7 @@ option.forEach((opt) => {
 const success = (pos) => {
   let crd = pos.coords;
   country.current = [crd.latitude, crd.longitude];
-  map = L.map("map").setView(country.current, zoom);
+  map = L.map("map", { gestureHandling: true }).setView(country.current, zoom);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -152,7 +152,9 @@ const placeItem = (item) => {
         if (name.name == mark["options"]["id"]) {
           mark.openPopup();
         }
-        map.setView(name.location, zoom);
+        setTimeout(() => {
+          map.setView(name.location, zoom);
+        }, 200);
       }
     }
   }
