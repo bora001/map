@@ -310,19 +310,19 @@
   }
 
   .side_bar {
-    border: 2px solid blue;
-    position: absolute;
+    position: fixed;
     padding: 2vw;
-    top:85vh;
+    top:0;
     z-index: 9999;
-    width: 100%;
-    height: 100%;
+    width: 75%;
+    height: 45%;
+    right: -75%;
     background-color: rgb(228, 226, 226);
     transition: 1s;
   }
 
   .side_bar.mobile {
-    top: 55vh;
+    right: -2%;
     transition: 1s;
   }
 
@@ -342,15 +342,27 @@
     margin-bottom: 3.9063vw;
   }
 
+  .mode_box{
+    position: absolute;
+    left: -11vw;
+    width: 9vw;
+    border-radius: 2vw;
+    height: 5vh;
+    background-color: rgb(228, 226, 226);
+  }
+
   .mode {
     display: none !important;
   }
 
   .mobile_mode.hidden {
     display: block !important;
-    position: relative;
-    width: 6vw;
+    position: absolute;
     height: 1vw;
+    width: 6vw;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
     background-color: rgb(119, 190, 236);
     margin-right: 5vw;
     /* border-radius: 0;
@@ -428,7 +440,7 @@
 .side_bar .place_list .item {
   box-shadow: 0.6510vw 0.6510vw 1.3021vw rgb(197, 193, 193, 0.6);
   cursor: pointer;
-  width: 46%;
+  width: 47%;
   margin-bottom: 1.3021vw;
   font-size: 2.8646vw;
   margin-right: 2vw;
