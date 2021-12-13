@@ -12,9 +12,25 @@ let mode = "null";
 let check = false;
 let currentCity;
 
-//select city
+let popup;
+const markers = [];
+
+//html
 const option = document.querySelectorAll(".opt_box p");
 const optionVisible = document.querySelector(".country_box p");
+
+const modeBtn = document.querySelector(".mode");
+
+const infoInput = document.querySelector(".info");
+const infoSubmit = document.querySelector(".info_submit");
+const infoCancel = document.querySelector(".info_cancel");
+
+const placeDiv = document.querySelector(".place_list");
+
+const mobileBtn = document.querySelector(".mobile_mode");
+const sideBar = document.querySelector(".side_bar");
+
+//select city
 
 optionVisible.addEventListener("click", function () {
   document.querySelector(".opt_box").classList.toggle("hidden");
@@ -29,7 +45,7 @@ option.forEach((opt) => {
     currentCity = city;
     document.querySelector(".opt_box").classList.add("hidden");
     optionVisible.innerText = opt.innerText;
-    setLocation(country[city]);
+    // setLocation(country[city]);
     cleanList();
 
     if (city === currentCity) {
@@ -42,7 +58,15 @@ option.forEach((opt) => {
 const success = (pos) => {
   let crd = pos.coords;
   country.current = [crd.latitude, crd.longitude];
-  map = L.map("map", { gestureHandling: true }).setView(country.current, zoom);
+  map = L.map("map", { gestureHandling: true })
+    .fitWorld()
+    .setView(country.current, zoom);
+  // .fitWorld();
+  map.locate({
+    setView: true,
+    maxZoom: zoom,
+  });
+
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -52,6 +76,7 @@ const success = (pos) => {
     .bindPopup("you are here!")
     .openPopup();
   markerNow._icon.style.filter = "hue-rotate(150deg)";
+
   map.addEventListener("click", function (e) {
     !check ? newMarker(e.latlng) : "";
   });
@@ -64,12 +89,11 @@ const error = (err) => {
 navigator.geolocation.getCurrentPosition(success, error);
 
 const setLocation = (data) => {
-  mode === "fly" ? map.flyTo(data, zoom) : map.setView(data, 12);
+  console.log(data, "working good");
+  // mode === "fly" ? map.flyTo(data, zoom) : map.setView(data, 12);
 };
 
 //mode
-
-const modeBtn = document.querySelector(".mode");
 
 modeBtn.addEventListener("click", function () {
   modeBtn.classList.toggle("active");
@@ -77,10 +101,7 @@ modeBtn.addEventListener("click", function () {
 });
 
 //marker
-const infoInput = document.querySelector(".info");
-const infoSubmit = document.querySelector(".info_submit");
-const infoCancel = document.querySelector(".info_cancel");
-let popup;
+
 const newMarker = (position) => {
   infoInput.classList.remove("hidden");
   let newMarker = L.marker(position, { draggable: true }).addTo(map);
@@ -114,50 +135,54 @@ const newMarker = (position) => {
 
 //place to visit
 
-const placeDiv = document.querySelector(".place_list");
-const markers = [];
 const renderPlace = (list) => {
   if (!list && placeDiv.childElementCount < 1) {
     const html = `<div>Service will be available soon!</div>`;
     placeDiv.insertAdjacentHTML("afterbegin", html);
     return;
   }
+
   if (placeDiv.childElementCount !== list.length) {
     for (let item of list) {
       let placeMarker = L.marker(item.location, { id: item.name })
         .addTo(map)
-        .bindPopup(item.name)
-        .openPopup();
+        .bindPopup(item.name);
       placeMarker._icon.style.filter = "hue-rotate(280deg)";
 
       markers.push(placeMarker);
+
       const html = `
-  <div class="item" onClick="placeItem(this)">
-  <div class="img_box">
-  <img src=${item.img} /></div>
-  <p>${item.name}</p>
-  </div>
-  `;
+      <div class="item">
+      <div class="img_box">
+      <img src=${item.img} /></div>
+      <p class="theItem">${item.name}</p>
+      </div>
+      `;
+      let name = item.name;
+
       placeDiv.insertAdjacentHTML("afterbegin", html);
+      const itemBtn = document.querySelector(".item");
+
+      itemBtn.addEventListener("click", function () {
+        console.log("click", name);
+        let arr = placetogo[currentCity];
+        let [filtered] = arr.filter((select) => select.name == name);
+        let location = filtered.location;
+        itemLocation = filtered.location;
+        let [mark] = markers.filter((mark) => mark["options"]["id"] == name);
+
+        map.setView(location, zoom);
+        mark.openPopup();
+        sideBar.classList.remove("mobile");
+      });
     }
   }
 };
 
-const placeItem = (item) => {
-  let arr = placetogo[currentCity];
-
-  for (let name of arr) {
-    if (name.name === item.innerText) {
-      for (let mark of markers) {
-        if (name.name == mark["options"]["id"]) {
-          mark.openPopup();
-        }
-        setTimeout(() => {
-          map.setView(name.location, zoom);
-        }, 200);
-      }
-    }
-  }
+const mobileItemClick = () => {
+  itemBtn.forEach(function () {
+    console.log("mobile, click");
+  });
 };
 
 //clean placelist
@@ -168,9 +193,6 @@ const cleanList = () => {
 };
 
 //mobile
-
-const mobileBtn = document.querySelector(".mobile_mode");
-const sideBar = document.querySelector(".side_bar");
 mobileBtn.addEventListener("click", function () {
   sideBar.classList.toggle("mobile");
   mobileBtn.classList.toggle("mobile");
